@@ -1,0 +1,37 @@
+{
+	"name": <%- JSON.stringify(name) %>,
+	"version": "0.0.1",
+	"description": <%- JSON.stringify(description) %>,
+	"publisher": <%- JSON.stringify(publisher) %>,
+	"main": "dist/main.js",
+	"renderer": "dist/renderer.js",
+	"engines": {
+		"node": ">=12.0 <13.0"
+	},
+	"contributes": {
+		"crds": [],
+		"cloudProviders": [],
+		"kubernetesDistros": []
+	},
+	"keywords": [
+		"lens",
+		"extension",
+		"k8slens",
+		"kubernetes"
+	],
+	"scripts": {
+		"start": "webpack --watch",
+		"build": "npm run clean && webpack",
+		"clean": "rm -rf ./dist"
+	},
+	"devDependencies": {
+		<%- dep("@k8slens/extensions") %>,
+		<%- dep("ts-loader") %>,
+		<%- dep("typescript") %>,
+		<%- dep("@types/node") %>,
+		<%- dep("@types/react") %>,
+		<%- dep("webpack") %>,
+		<%- dep("webpack-cli") %>,
+		<%- dep("eslint") %>
+	}
+}
