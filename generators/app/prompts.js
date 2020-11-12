@@ -11,7 +11,7 @@ exports.askForExtensionName = (generator, extensionConfig) => {
     type: "input",
     name: "name",
     message: "What's the name of your extension?",
-    default: "my-new-lens-extension",
+    default: "my-ne-lens-extension",
     validate: validator.validateExtensionName
   }).then(nameAnswer => {
     extensionConfig.name = nameAnswer.name;
