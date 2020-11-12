@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`works as expected 1`] = `
+exports[`ext-ts generator works as expected 1`] = `
 Object {
   "contributes": Object {
     "cloudProviders": Array [],
@@ -40,7 +40,7 @@ Object {
 }
 `;
 
-exports[`works as expected 2`] = `
+exports[`ext-ts generator works as expected 2`] = `
 Object {
   "compilerOptions": Object {
     "allowSyntheticDefaultImports": true,
