@@ -1,0 +1,30 @@
+name: PR testing
+
+on:
+  pull_request:
+    paths:
+    - 'generators/**'
+    - 'yarn.lock'
+    - 'package.json'
+
+jobs:
+  test:
+    if: "!contains(github.event.pull_request.labels.*.name, 'skip-ci')"
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      # same node.js version as in package.json > engines
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+
+      - name: npm test
+        run: |
+          yarn
+          yarn test
+        

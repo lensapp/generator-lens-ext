@@ -10,6 +10,7 @@ module.exports = {
     await prompts.askForExtensionDescription(generator, extensionConfig);
     await prompts.askForExtensionPublisher(generator, extensionConfig);
     await prompts.askForGit(generator, extensionConfig);
+    await prompts.askForInstallDependencies(generator, extensionConfig);
     await prompts.askForPackageManager(generator, extensionConfig);
   },
 
@@ -30,6 +31,5 @@ module.exports = {
     generator.fs.copy(generator.sourceRoot() + "/.eslintrc.main.js", extensionConfig.name + "/.eslintrc.main.js");
     generator.fs.copy(generator.sourceRoot() + "/.eslintrc.renderer.js", extensionConfig.name + "/.eslintrc.renderer.js");
 
-    extensionConfig.installDependencies = true;
   }
 };

@@ -16,7 +16,6 @@ module.exports = class extends Generator {
     this.option("extensionPublisher", { type: String });
 
     this.extensionConfig = Object.create(null);
-    this.extensionConfig.installDependencies = false;
     this.extensionGenerator = undefined;
     this.abort = false;
   }
@@ -69,7 +68,6 @@ module.exports = class extends Generator {
     if (this.abort) {
       return;
     }
-    console.log("this.extensionConfig.type", this.extensionConfig.type);
     this.sourceRoot(path.join(__dirname, "./templates/" + this.extensionConfig.type));
 
     return this.extensionGenerator.writing(this, this.extensionConfig);

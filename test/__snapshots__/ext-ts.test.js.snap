@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ext-ts generator works as expected 1`] = `
+Object {
+  "contributes": Object {
+    "cloudProviders": Array [],
+    "crds": Array [],
+    "kubernetesDistros": Array [],
+  },
+  "description": "randome description",
+  "devDependencies": Object {
+    "@k8slens/extensions": "^4.0.0-alpha.5",
+    "@types/node": "^12.12.9",
+    "@types/react": "^16.9.56",
+    "eslint": "^7.13.0",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.0.5",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.11",
+  },
+  "engines": Object {
+    "node": ">=12.0 <13.0",
+  },
+  "keywords": Array [
+    "lens",
+    "extension",
+    "k8slens",
+    "kubernetes",
+  ],
+  "main": "dist/main.js",
+  "name": "my-test-ext",
+  "publisher": "random publisher",
+  "renderer": "dist/renderer.js",
+  "scripts": Object {
+    "build": "npm run clean && webpack",
+    "clean": "rm -rf ./dist",
+    "start": "webpack --watch",
+  },
+  "version": "0.0.1",
+}
+`;
+
+exports[`ext-ts generator works as expected 2`] = `
+Object {
+  "compilerOptions": Object {
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "lib": Array [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+    ],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strict": false,
+    "target": "ES2017",
+  },
+  "exclude": Array [
+    "node_modules",
+    "*.js",
+  ],
+  "include": Array [
+    "./*.ts",
+    "./*.tsx",
+  ],
+}
+`;

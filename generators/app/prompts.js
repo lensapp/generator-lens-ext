@@ -11,7 +11,7 @@ exports.askForExtensionName = (generator, extensionConfig) => {
     type: "input",
     name: "name",
     message: "What's the name of your extension?",
-    default: "my-new-lens-extension",
+    default: "my-ne-lens-extension",
     validate: validator.validateExtensionName
   }).then(nameAnswer => {
     extensionConfig.name = nameAnswer.name;
@@ -62,10 +62,17 @@ exports.askForGit = (generator, extensionConfig) => {
   });
 };
 
-/**
-* @param {import('yeoman-generator')} generator
-* @param {Object} extensionConfig
-*/
+exports.askForInstallDependencies = (generator, extensionConfig) => {
+  return generator.prompt({
+    type: "confirm",
+    name: "installDependencies",
+    message: "Install dependencies after initialization?",
+    default: true
+  }).then(({ installDependencies }) => {
+    extensionConfig.installDependencies = installDependencies;
+  });
+};
+
 exports.askForPackageManager = (generator, extensionConfig) => {
   extensionConfig.pkgManager = "npm";
   return generator.prompt({
