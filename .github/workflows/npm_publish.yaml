@@ -22,20 +22,15 @@ jobs:
     # npm version patch will automatically git commit
     - name: Run 'npm version patch'
       run: |
+        git config --local user.email "github-action@mirantis.com"
+        git config --local user.name "Github Action Bot"
         npm version patch
-
-    - name: Git tag new version
-      run: |
-        NEW_VERSION=$(node -p -e "require('./package.json').version")
-        git config --local user.email "github-action@kuuhubb.com"
-        git config --local user.name "Github Action"
-        git tag v$NEW_VERSION
 
     - name: Push commits
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
+        branch: main
         tags: true
 
   npm_publish:
