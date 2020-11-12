@@ -1,0 +1,91 @@
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  versioning:
+    name: Versioning
+    # github does not have PR event type 'merged' for github action
+    # so we use 'closed' instead, and add condition:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    # same node.js version as in package.json > engines
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+    
+    # npm version patch will automatically git commit
+    - name: Run 'npm version patch'
+      run: |
+        npm version patch
+
+    - name: Git tag new version
+      run: |
+        NEW_VERSION=$(node -p -e "require('./package.json').version")
+        git config --local user.email "github-action@kuuhubb.com"
+        git config --local user.name "Github Action"
+        git tag v$NEW_VERSION
+
+    - name: Push commits
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
+        tags: true
+
+  npm_publish:
+    name: NPM publish
+    needs: versioning
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    # need this if commit/push in other jobs
+    - name: Fetch latest commits by other jobs
+      run: |
+        git pull
+
+    # same node.js version as in package.json > engines
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+        registry-url: 'https://registry.npmjs.org'
+        scope: '@k8slens'
+
+    - name: Publish
+      run: |
+        NEW_VERSION=$(node -p -e "require('./package.json').version")
+        yarn
+        yarn publish --new-version $NEW_VERSION --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    # see https://api.slack.com/apps/A01EY5R9UMP/incoming-webhooks?
+    - name: Notify '#lens-ci' channel
+      run: |
+        NEW_VERSION=$(node -p -e "require('./package.json').version")
+        curl -X POST $SLACK_WEBHOOK_LENS_CI_CHANNEL \
+        -H 'Content-type: application/json' \
+        --data-binary @- << EOF
+        {
+            "text": "publish @k8slens/generator-lens-ext v$NEW_VERSION to NPM",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "publish @k8slens/generator-lens-ext v$NEW_VERSION to NPM"
+                }
+              }
+            ]
+        }
+        EOF
+      env:
+        SLACK_WEBHOOK_LENS_CI_CHANNEL: ${{ secrets.SLACK_WEBHOOK_LENS_CI_CHANNEL }}
