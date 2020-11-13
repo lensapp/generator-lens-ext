@@ -27,10 +27,10 @@ module.exports = class extends Generator {
     this.extensionConfig.dependencyVersions = dependencyVersions;
     this.extensionConfig.dep = function (name) {
       const version = dependencyVersions[name];
-      if (typeof version === "undefined") {
+      if (!version) {
         throw new Error(`Module ${name} is not listed in constant dependencyVersions \n ${JSON.stringify(version, null, 2)}`);
       }
-      return `${JSON.stringify(name)}: ${JSON.stringify(version)}`;
+      return `${name}: ${version}`;
     };
   }
 
@@ -69,7 +69,6 @@ module.exports = class extends Generator {
       return;
     }
     this.sourceRoot(path.join(__dirname, "./templates/" + this.extensionConfig.type));
-
     return this.extensionGenerator.writing(this, this.extensionConfig);
   }
 
@@ -111,7 +110,7 @@ module.exports = class extends Generator {
       this.extensionGenerator.endMessage(this, this.extensionConfig);
     }
 
-    this.log("For more information visit https://github.com/lensapp/lens.");
+    this.log("Lens Extension Documentation https://docs.k8slens.dev/latest/extensions/.");
     this.log("\r\n");
   }
 };
