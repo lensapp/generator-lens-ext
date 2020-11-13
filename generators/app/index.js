@@ -6,7 +6,7 @@ const dependencyVersions = require("./deps");
 
 // TODO: add JS version
 // const commandjs = require("./generate-ext-js");
-const extTS = require("./generate-ext-ts ");
+const extTS = require("./generate-ext-ts");
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
@@ -30,7 +30,7 @@ module.exports = class extends Generator {
       if (!version) {
         throw new Error(`Module ${name} is not listed in constant dependencyVersions \n ${JSON.stringify(version, null, 2)}`);
       }
-      return `${name}: ${version}`;
+      return `"${name}": "${version}"`;
     };
   }
 
@@ -111,6 +111,7 @@ module.exports = class extends Generator {
     }
 
     this.log("Lens Extension Documentation https://docs.k8slens.dev/latest/extensions/.");
+    this.log("'npm start' to start the development.");
     this.log("\r\n");
   }
 };
