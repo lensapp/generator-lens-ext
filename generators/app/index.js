@@ -112,6 +112,7 @@ module.exports = class extends Generator {
 
     this.log("Lens Extension Documentation https://docs.k8slens.dev/latest/extensions/.");
     this.log("'npm start' to start the development.");
+    this.log("Join #lens-extensions on Lens Dev Slack http://k8slens.slack.com/");
     this.log("\r\n");
   }
 };
