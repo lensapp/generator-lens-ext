@@ -12,6 +12,7 @@ module.exports = {
     await prompts.askForGit(generator, extensionConfig);
     await prompts.askForInstallDependencies(generator, extensionConfig);
     await prompts.askForPackageManager(generator, extensionConfig);
+    await prompts.askForSymlink(generator, extensionConfig);
   },
 
   writing: (generator, extensionConfig) => {
