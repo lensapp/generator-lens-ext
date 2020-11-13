@@ -15,9 +15,11 @@ test("ext-ts generator works as expected", async () => {
     publisher: "random publisher",
     gitInit: true,
     pkgManager: "yarn",
-    installDependencies: false
+    installDependencies: false,
+    symlink: false,
   });
-  console.log("resultPath", resultPath);
+  // for debug
+  // console.log("resultPath", resultPath);
   const files = [
     "README.md", "package.json", "webpack.config.js", "tsconfig.json", ".gitignore",
     "main.ts", "renderer.tsx", "page.tsx",
