@@ -62,21 +62,21 @@ jobs:
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    # see https://api.slack.com/apps/A01EY5R9UMP/incoming-webhooks?
-    - name: Notify '#lens-ci' channel
+    # see https://api.slack.com/apps/A01F1B1M9C1/incoming-webhooks
+    - name: Notify '#lens-dev' channel
       run: |
         NEW_VERSION=$(node -p -e "require('./package.json').version")
         curl -X POST $SLACK_WEBHOOK_LENS_CI_CHANNEL \
         -H 'Content-type: application/json' \
         --data-binary @- << EOF
         {
-            "text": "publish @k8slens/generator-lens-ext v$NEW_VERSION to NPM",
+            "text": "published generator-lens-ext v$NEW_VERSION to NPM",
             "blocks": [
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "publish @k8slens/generator-lens-ext v$NEW_VERSION to NPM"
+                  "text": "generator-lens-ext v$NEW_VERSION published, install\n\`\`\`\nnpm install -g generator-lens-ext\n\`\`\`\nVisit <https://github.com/lensapp/generator-lens-ext> for details."
                 }
               }
             ]
