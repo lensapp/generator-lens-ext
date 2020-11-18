@@ -9,7 +9,7 @@ exports.askForExtensionName = async (generator, extensionConfig) => {
     type: "input",
     name: "name",
     message: "What's the name of your extension?",
-    default: "my-ne-lens-extension",
+    default: "my-first-lens-ext",
     validate: validator.validateExtensionName
   });
   extensionConfig.name = name;
