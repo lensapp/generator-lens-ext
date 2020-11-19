@@ -25,7 +25,6 @@ module.exports = {
     fs.copyTpl(generator.sourceRoot() + "/tsconfig.json", name + "/tsconfig.json", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/main.ts", name + "/main.ts", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/renderer.tsx", name + "/renderer.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/page.tsx", name + "/page.tsx", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/package.json", name + "/package.json", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/webpack.config.js", name + "/webpack.config.js", extensionConfig);
 
