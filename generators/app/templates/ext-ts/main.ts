@@ -11,7 +11,8 @@ import { Store, Util } from "@k8slens/extensions";
  * custom application menu items, and generally run custom code in Lens'
  * main process.
  * 
- * API doc <https://docs.k8slens.dev/master/extensions/api/classes/lensmainextension/>
+ * See more details: <https://docs.k8slens.dev/master/extensions/capabilities/common-capabilities/#main-extension>
+ * LensMainExtension API doc <https://docs.k8slens.dev/master/extensions/api/classes/lensmainextension/>
  * 
  * MainExtension which extends LensMainExtension runs in Lens' 'main' process (NOT 'renderer' process)
  * main vs renderer <https://www.electronjs.org/docs/tutorial/quick-start#main-and-renderer-processes>
