@@ -1,7 +1,7 @@
-import { LensRendererExtension, Component } from "@k8slens/extensions";
+import { LensRendererExtension, Interface, Component } from "@k8slens/extensions";
 import React from "react"
 
-const { Icon } = Component;
+const { Icon, PageLayout } = Component;
 
 /**
  * 
@@ -25,168 +25,239 @@ const { Icon } = Component;
  * @extends {LensRendererExtension}
  */
 export default class RendererExtension extends LensRendererExtension {
-    
-    #globalPageRoutePath = "/ext_global_page"
 
-    /**
-     *  `globalPages` allows you register custom global page.
-     * 
-     *  The global page is a full-screen page that hides all other content from a window.
-     *
-     *  ```
-     *            Lens
-     *   +-----------------------+
-     *   |*|                     |
-     *   |*|                     |
-     *   | |    globalPages      |
-     *   | |                     |
-     *   | |                     |
-     *   | |                     |
-     *   +-----------------------+
-     * 
-     * ```
-     *
-     * @memberof RendererExtension
-     */
-    globalPages = [
-      {
-        id: this.#globalPageRoutePath,
-        routePath: this.#globalPageRoutePath,
-        components: {
-          Page: (): JSX.Element => (
-            <div> 
-              <h1>"An Extension Global Page"</h1>
-            </div>
-          ),
-        }
-      }
-    ]
-
-    /**
-     *  `globalPageMenus` allows you register custom global page.
-     *
-     *  ```
-     *            Lens
-     *   +-----------------------+
-     *   |*|                     |
-     *   |*| <---------------+ globalPageMenus
-     *   | |                     |
-     *   | |                     |
-     *   | |                     |
-     *   | |                     |
-     *   +-----------------------+
-     * 
-     * ```
-     *
-     * @memberof RendererExtension
-     */
-    globalPageMenus = [
-      {
-        title: "To Ext Global Page",
-        target: {
-          pageId: this.#globalPageRoutePath
-        },
-        components: {
-          Icon: (): JSX.Element => <Icon material="link" />,
-        }
-      }
-    ]
-
-    /**
-     *  `statusBarItems` allows you register register custom icons and text to a status bar area.
-     *
-     *  ```
-     *            Lens
-     *   +-----------------------+
-     *   |*|                     |
-     *   |*| 
-     *   | |                     |
-     *   | |                     |
-     *   | |                     |
-     *   | |                   * |<---------------+ statusBarItems
-     *   +-----------------------+
-     *
-     * ```
-     *
-     * @memberof RendererExtension
-    */
-    statusBarItems = [
-      {
-        item: (
-          <Icon
-            material="link"
-            onClick={() => this.navigate(this.#globalPageRoutePath)}
-          />
-        )
-      }
-    ]
-
-
-    #clusterPageRoutePath = "/ext_cluster_page"
-
-    /**
-     *  `clusterPages` allows you register custom cluster page.
-     *
-     *  ```
-     *            Lens
-     *   +-----------------------+
-     *   |*|-----|               |
-     *   |*|-----|               |
-     *   | |-----|  clusterPages |
-     *   | +-----+               |
-     *   | |     |               |
-     *   | |     |               |
-     *   +-----------------------+
-     * 
-     * ```
-     *
-     * @memberof RendererExtension
-     */
-    clusterPages = [
-      {
-        id: this.#clusterPageRoutePath,
-        routePath: this.#clusterPageRoutePath,
-        title: "Cluster Page Title",
-        components: {
-          Page: (): JSX.Element => (
+  /**
+   *  `globalPages` allows you register custom global page.
+   * 
+   *  The global page is a full-screen page that hides all other content from a window.
+   *
+   *  ```
+   *            Lens
+   *   +-----------------------+
+   *   |*|                     |
+   *   |*|                     |
+   *   | |    globalPages      |
+   *   | |                     |
+   *   | |                     |
+   *   | |                     |
+   *   +-----------------------+
+   * 
+   * ```
+   *
+   * @memberof RendererExtension
+   */
+  globalPages: Interface.PageRegistration[] = [
+    {
+      components: {
+        Page: (): JSX.Element => (
+          <PageLayout
+            header={<h2>Extension Global Page</h2>}
+            showOnTop
+          >
             <div>
-              <h1>"An Extension Cluster Page"</h1>
+              <h1>Global Page Content</h1>
+              <br />
+              <p>A very long paragraph</p>
             </div>
-          ),
-        }
+          </PageLayout>
+        ),
       }
-    ]
-    /**
-     *  `clusterPageMenus` allows you register custom cluster page menu items.
-     * 
-     *  `clusterPageMenus` are menu items showing the sidebar of  a `clusterPages`.
-     *  
-     * ```
-     *             Lens
-     *   +-----------------------+
-     *   |*|-----|               |
-     *   |*|-----|  <---------------+ clusterPageMenus
-     *   | |-----|               |
-     *   | +-----+               |
-     *   | |     |               |
-     *   | |     |               |
-     *   +-----------------------+
-     * 
-     * ```
-     *
-     * @memberof RendererExtension
-     */
-     clusterPageMenus = [
-       {
-         target: {
-           pageId: this.#clusterPageRoutePath,
-           params: {}
-         },
-         // the text on the menu item
-         title: "Cluster Page",
-         components: {
-           Icon: (): JSX.Element => <Icon material="pages" />,
-         }
-       }
-     ]
+    }
+  ]
+
+  /**
+   *  `globalPageMenus` allows you register custom global page.
+   *
+   *  ```
+   *            Lens
+   *   +-----------------------+
+   *   |*|                     |
+   *   |*| <---------------+ globalPageMenus
+   *   | |                     |
+   *   | |                     |
+   *   | |                     |
+   *   | |                     |
+   *   +-----------------------+
+   * 
+   * ```
+   *
+   * @memberof RendererExtension
+   */
+  globalPageMenus: Interface.PageMenuRegistration[] = [
+    {
+      title: "To Extension Global Page",
+      components: {
+        Icon: (): JSX.Element => (
+          <Icon
+            material="trip_origin"
+            interactive
+            style={{
+              color: "white"
+            }}
+            onClick={() => this.navigate()}
+          />
+        ),
+      }
+    }
+  ]
+
+  /**
+   *  `statusBarItems` allows you register register custom icons and text to a status bar area.
+   *
+   *  ```
+   *            Lens
+   *   +-----------------------+
+   *   |*|                     |
+   *   |*| 
+   *   | |                     |
+   *   | |                     |
+   *   | |                     |
+   *   | |                   * |<---------------+ statusBarItems
+   *   +-----------------------+
+   *
+   * ```
+   *
+   * @memberof RendererExtension
+  */
+  statusBarItems: Interface.StatusBarRegistration[] = [
+    {
+      item: (
+        <Icon
+          material="link"
+          interactive
+          style={{
+            color: "white"
+          }}
+          onClick={() => this.navigate()}
+        />
+      )
+    }
+  ]
+
+  /**
+   *  `clusterPages` allows you register custom cluster page.
+   *
+   *  ```
+   *            Lens
+   *   +-----------------------+
+   *   |*|-----|               |
+   *   |*|-----|               |
+   *   | |-----|  clusterPages |
+   *   | +-----+               |
+   *   | |     |               |
+   *   | |     |               |
+   *   +-----------------------+
+   * 
+   * ```
+   *
+   * @memberof RendererExtension
+   */
+  #clusterPageId = "cluster_page";
+  clusterPages = [
+    // a standard cluster page
+    {
+      id: this.#clusterPageId,
+      title: "Cluster Page Title",
+      components: {
+        Page: (): JSX.Element => (
+          <div style={{
+            padding: "2em",
+          }}>
+            <h1>A Standard Extension Cluster Page</h1>
+          </div>
+        ),
+      }
+    },
+    // a cluster 'sub' page show in a tab
+    {
+      id: "cluster_sub_page_one",
+      title: "Cluster Sub Page One",
+      components: {
+        Page: (): JSX.Element => (
+          <div style={{
+            padding: "1em",
+          }}>
+            <h1>Sub-Page One in Tab</h1>
+          </div>
+        ),
+      }
+    },
+    {
+      id: "cluster_sub_page_two",
+      title: "Cluster Sub Page One",
+      components: {
+        Page: (): JSX.Element => (
+          <div style={{
+            padding: "1em",
+          }}>
+            <h1>Sub-Page Two in Tab</h1>
+          </div>
+        ),
+      }
+    }
+  ]
+  /**
+   *  `clusterPageMenus` allows you register custom cluster page menu items.
+   * 
+   *  `clusterPageMenus` are menu items showing the sidebar of  a `clusterPages`.
+   *  
+   * ```
+   *             Lens
+   *   +-----------------------+
+   *   |*|-----|               |
+   *   |*|-----|  <---------------+ clusterPageMenus
+   *   | |-----|               |
+   *   | +-----+               |
+   *   | |     |               |
+   *   | |     |               |
+   *   +-----------------------+
+   * 
+   * ```
+   *
+   * @memberof RendererExtension
+   */
+
+  #menuItemParentId = "cluster_page_menu_folder";
+  clusterPageMenus = [
+    // a cluster menu item which links to a cluster page
+    {
+      title: "Cluster Page",
+      target: {
+        pageId: this.#clusterPageId,
+        params: {}
+      },
+      components: {
+        Icon: (): JSX.Element => <Icon material="pages" />,
+      }
+    },
+    // the following three items are an example of an menu item (parent)
+    // that allows to have child items.
+    //
+    // the parent, a foldable menu item
+    {
+      id: this.#menuItemParentId,
+      title: "Foldable Item",
+      components: {
+        Icon: (): JSX.Element => <Icon material="pages" />,
+      }
+    },
+    // the child item one
+    {
+      parentId: this.#menuItemParentId,
+      target: { pageId: "cluster_sub_page_one", params: {} },
+      title: "Sub-Page 1",
+      components: {
+        Icon: (): JSX.Element => <Icon material="arrow_right" />,
+      }
+    },
+    // the child item two
+    {
+      parentId: this.#menuItemParentId,
+      target: { pageId: "cluster_sub_page_two", params: {} },
+      title: "Sub-Page 2",
+      components: {
+        Icon: (): JSX.Element => <Icon material="arrow_right" />,
+      }
+    },
+  ]
 }
