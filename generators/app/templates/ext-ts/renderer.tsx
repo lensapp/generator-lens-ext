@@ -2,17 +2,17 @@ import { LensRendererExtension, Component } from "@k8slens/extensions";
 import React from "react"
 
 const { Icon } = Component;
+
 /**
  * 
  * RendererExtension which extends LensRendererExtension runs in Lens' 'renderer' process (NOT 'main' process)
  * main vs renderer <https://www.electronjs.org/docs/tutorial/quick-start#main-and-renderer-processes>
  * 
- * LensRendererExtension is the interface to Lens' renderer process
- *
- * LensRendererExtension api allows you to access, configure, and customize Lens data add
- * custom Lens UI elements, and generally run custom code in Lens' renderer process.
- *  The custom Lens UI elements that can be added include global pages, cluster pages, 
- * cluster features, app preferences, status bar items... and more. See details:
+ * LensRendererExtension is the interface to Lens' renderer process. Its api allows you to access, configure, 
+ * and customize Lens data add custom Lens UI elements, and generally run custom code in Lens' renderer process.
+ * 
+ * The custom Lens UI elements that can be added include global pages, cluster pages, 
+ * cluster features, app preferences, status bar items... See details:
  * <https://docs.k8slens.dev/master/extensions/capabilities/common-capabilities/#renderer-extension>
  *
  * LensRendererExtension API doc <https://docs.k8slens.dev/master/extensions/api/classes/lensrendererextension/>
@@ -27,16 +27,24 @@ const { Icon } = Component;
 export default class RendererExtension extends LensRendererExtension {
     
     #globalPageRoutePath = "/ext_global_page"
+
     /**
-     * +--------Lens--------+
-     * +--------------------+
-     * |                    |
-     * |                    |
-     * |    globalPages     |
-     * |                    |
-     * |                    |
-     * +--------------------+
-     * +--------------------+
+     *  `globalPages` allows you register custom global page.
+     * 
+     *  The global page is a full-screen page that hides all other content from a window.
+     *
+     *  ```
+     *            Lens
+     *   +-----------------------+
+     *   |*|                     |
+     *   |*|                     |
+     *   | |    globalPages      |
+     *   | |                     |
+     *   | |                     |
+     *   | |                     |
+     *   +-----------------------+
+     * 
+     * ```
      *
      * @memberof RendererExtension
      */
@@ -54,29 +62,83 @@ export default class RendererExtension extends LensRendererExtension {
       }
     ]
 
+    /**
+     *  `globalPageMenus` allows you register custom global page.
+     *
+     *  ```
+     *            Lens
+     *   +-----------------------+
+     *   |*|                     |
+     *   |*| <---------------+ globalPageMenus
+     *   | |                     |
+     *   | |                     |
+     *   | |                     |
+     *   | |                     |
+     *   +-----------------------+
+     * 
+     * ```
+     *
+     * @memberof RendererExtension
+     */
     globalPageMenus = [
       {
-        title: "To Ext Global Page", // used in icon's tooltip
-        target: { pageId: this.#globalPageRoutePath },
+        title: "To Ext Global Page",
+        target: {
+          pageId: this.#globalPageRoutePath
+        },
         components: {
-          Icon: (): JSX.Element => <Icon material="pages" />,
+          Icon: (): JSX.Element => <Icon material="link" />,
         }
       }
     ]
 
-
-    #clusterPageRoutePath = "/ext_global_page"
     /**
+     *  `statusBarItems` allows you register register custom icons and text to a status bar area.
      *
+     *  ```
+     *            Lens
+     *   +-----------------------+
+     *   |*|                     |
+     *   |*| 
+     *   | |                     |
+     *   | |                     |
+     *   | |                     |
+     *   | |                   * |<---------------+ statusBarItems
+     *   +-----------------------+
      *
-     * +--------Lens--------+
-     * |--------------------+
-     * |-----|              |
-     * |-----| clusterPages |
-     * +-----+              |
-     * |     |              |
-     * |     |              |
-     * +-----+--------------+
+     * ```
+     *
+     * @memberof RendererExtension
+    */
+    statusBarItems = [
+      {
+        item: (
+          <Icon
+            material="link"
+            onClick={() => this.navigate(this.#globalPageRoutePath)}
+          />
+        )
+      }
+    ]
+
+
+    #clusterPageRoutePath = "/ext_cluster_page"
+
+    /**
+     *  `clusterPages` allows you register custom cluster page.
+     *
+     *  ```
+     *            Lens
+     *   +-----------------------+
+     *   |*|-----|               |
+     *   |*|-----|               |
+     *   | |-----|  clusterPages |
+     *   | +-----+               |
+     *   | |     |               |
+     *   | |     |               |
+     *   +-----------------------+
+     * 
+     * ```
      *
      * @memberof RendererExtension
      */
@@ -95,22 +157,31 @@ export default class RendererExtension extends LensRendererExtension {
       }
     ]
     /**
+     *  `clusterPageMenus` allows you register custom cluster page menu items.
      * 
+     *  `clusterPageMenus` are menu items showing the sidebar of  a `clusterPages`.
+     *  
+     * ```
+     *             Lens
+     *   +-----------------------+
+     *   |*|-----|               |
+     *   |*|-----|  <---------------+ clusterPageMenus
+     *   | |-----|               |
+     *   | +-----+               |
+     *   | |     |               |
+     *   | |     |               |
+     *   +-----------------------+
      * 
-     * +--------Lens--------+
-     * |--------------------+
-     * |-----|              |
-     * |-----| <-------+ clusterPageMenus
-     * +-----+              |
-     * |     |              |
-     * |     |              |
-     * +-----+--------------+
+     * ```
      *
      * @memberof RendererExtension
      */
      clusterPageMenus = [
        {
-         target: { pageId: this.#clusterPageRoutePath, params: {} },
+         target: {
+           pageId: this.#clusterPageRoutePath,
+           params: {}
+         },
          // the text on the menu item
          title: "Cluster Page",
          components: {
