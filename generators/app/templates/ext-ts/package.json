@@ -32,6 +32,8 @@
 		<%- dep("@types/react") %>,
 		<%- dep("webpack") %>,
 		<%- dep("webpack-cli") %>,
-		<%- dep("eslint") %>
+		<%- dep("eslint") %>,
+		<%- dep("@typescript-eslint/eslint-plugin") %>,
+		<%- dep("@typescript-eslint/parser") %>
 	}
 }
