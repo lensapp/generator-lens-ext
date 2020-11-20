@@ -6,7 +6,6 @@ Install Yeoman and the Lens Extension generator:
 npm install -g yo generator-lens-ext
 ```
 
-
 ## Run Generator
 
 The Yeoman generator will walk you through the steps required to create your extension prompting for the required information.
