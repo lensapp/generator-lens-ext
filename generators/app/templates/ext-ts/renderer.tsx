@@ -26,7 +26,7 @@ const { Icon } = Component;
  */
 export default class RendererExtension extends LensRendererExtension {
     
-    #globalPageRoutePath = '/ext_global_page'
+    #globalPageRoutePath = "/ext_global_page"
     /**
      * +--------Lens--------+
      * +--------------------+
@@ -41,31 +41,31 @@ export default class RendererExtension extends LensRendererExtension {
      * @memberof RendererExtension
      */
     globalPages = [
-        {
-            id: this.#globalPageRoutePath,
-            routePath: this.#globalPageRoutePath,
-            components: {
-                Page: () => (
-                    <div>
-                        <h1>"An Extension Global Page"</h1>
-                    </div>
-                ),
-            }
+      {
+        id: this.#globalPageRoutePath,
+        routePath: this.#globalPageRoutePath,
+        components: {
+          Page: (): JSX.Element => (
+            <div> 
+              <h1>"An Extension Global Page"</h1>
+            </div>
+          ),
         }
+      }
     ]
 
     globalPageMenus = [
-        {
-            title: "To Ext Global Page", // used in icon's tooltip
-            target: { pageId: this.#globalPageRoutePath },
-            components: {
-              Icon: () => <Icon material="pages" />,
-            }
+      {
+        title: "To Ext Global Page", // used in icon's tooltip
+        target: { pageId: this.#globalPageRoutePath },
+        components: {
+          Icon: (): JSX.Element => <Icon material="pages" />,
         }
+      }
     ]
 
 
-    #clusterPageRoutePath = '/ext_global_page'
+    #clusterPageRoutePath = "/ext_global_page"
     /**
      *
      *
@@ -81,18 +81,18 @@ export default class RendererExtension extends LensRendererExtension {
      * @memberof RendererExtension
      */
     clusterPages = [
-        {
-            id: this.#clusterPageRoutePath,
-            routePath: this.#clusterPageRoutePath,
-            title: "Cluster Page Title",
-            components: {
-                Page: () => (
-                    <div>
-                        <h1>"An Extension Cluster Page"</h1>
-                    </div>
-                ),
-            }
+      {
+        id: this.#clusterPageRoutePath,
+        routePath: this.#clusterPageRoutePath,
+        title: "Cluster Page Title",
+        components: {
+          Page: (): JSX.Element => (
+            <div>
+              <h1>"An Extension Cluster Page"</h1>
+            </div>
+          ),
         }
+      }
     ]
     /**
      * 
@@ -109,13 +109,13 @@ export default class RendererExtension extends LensRendererExtension {
      * @memberof RendererExtension
      */
      clusterPageMenus = [
-        {
-            target: { pageId: this.#clusterPageRoutePath, params: {} },
-            // the text on the menu item
-            title: "Cluster Page",
-            components: {
-                Icon: () => <Icon material="pages" />,
-            }
-        }
-    ]
+       {
+         target: { pageId: this.#clusterPageRoutePath, params: {} },
+         // the text on the menu item
+         title: "Cluster Page",
+         components: {
+           Icon: (): JSX.Element => <Icon material="pages" />,
+         }
+       }
+     ]
 }

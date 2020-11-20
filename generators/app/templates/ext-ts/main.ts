@@ -43,27 +43,27 @@ export default class MainExtension extends LensMainExtension {
      * when your extension is enabled. (typically from the Lens Extensions Page)
      * @memberof MainExtension
      */
-    onActivate() {
-       // print hello world when extension is activated
-       // !! Note that the console statements in MainExtension is NOT visible in the 
-       // !! DevTools console in Lens
-       // To see console statements, start the Lens app from a Terminal
-       console.log('activated');
+    onActivate(): void {
+      // print hello world when extension is activated
+      // !! Note that the console statements in MainExtension is NOT visible in the 
+      // !! DevTools console in Lens
+      // To see console statements, start the Lens app from a Terminal
+      console.log("activated");
 
-       // The following block is an example you can do in onActivate()
-       // You can access Lens' state data and periodically logs the name of the 
-       // currently active cluster in Lens.
-       // 
-       // see what else you can do with Store in our API docs
-       // <https://docs.k8slens.dev/master/extensions/api/modules/_core_api_stores_/>
-       const { clusterStore } = Store;
-       this.#timer = setInterval(() => {
-         if (!clusterStore.active) {
-           console.log("No active cluster");
-           return;
-         }
-         console.log("active cluster is", clusterStore.active.contextName);
-       }, 5000);
+      // The following block is an example you can do in onActivate()
+      // You can access Lens' state data and periodically logs the name of the 
+      // currently active cluster in Lens.
+      // 
+      // see what else you can do with Store in our API docs
+      // <https://docs.k8slens.dev/master/extensions/api/modules/_core_api_stores_/>
+      const { clusterStore } = Store;
+      this.#timer = setInterval(() => {
+        if (!clusterStore.active) {
+          console.log("No active cluster");
+          return;
+        }
+        console.log("active cluster is", clusterStore.active.contextName);
+      }, 5000);
     }
     /**
      * onDeactivate is called when the extension is disabled (typically from the Lens 
@@ -71,15 +71,15 @@ export default class MainExtension extends LensMainExtension {
      * extension, if necessary.
      * @memberof MainExtension
      */
-    onDeactivate() {
-        // print hello world when extension is deactivated
-        // !! Note that the console statements in MainExtension is NOT visible in the 
-        // !! DevTools console in Lens
-        // To see console statements, start the Lens app from a Terminal
-        console.log('deactivated');
+    onDeactivate(): void {
+      // print hello world when extension is deactivated
+      // !! Note that the console statements in MainExtension is NOT visible in the 
+      // !! DevTools console in Lens
+      // To see console statements, start the Lens app from a Terminal
+      console.log("deactivated");
 
-        // You can clear the setInterval called in onActivate() in onDeactivate
-        clearInterval(this.#timer);
+      // You can clear the setInterval called in onActivate() in onDeactivate
+      clearInterval(this.#timer);
     }
     /**
      * appMenus is the only UI feature customizable in the main extension API.
@@ -91,25 +91,25 @@ export default class MainExtension extends LensMainExtension {
      * @memberof MainExtension
      */
     appMenus = [
-        {
-            // parentId is the id of the menu to put this menu item under
-            parentId: "help",
-            // label is the visible text label of the menu item
-            // !! Note that reload the Lens windows (CMD+R/Ctrl+R) doesn't reload the 'main' process
-            // !! to see the changes you made to "label", you need to restart Lens
-            label: "Sample",
-            click() {
-                console.log("clicked menu item");
-                // this.navigate() will navigate to this extension
-                // more parameters see our API doc
-                // <https://docs.k8slens.dev/master/extensions/api/classes/lensmainextension/?h=+navigate#navigate>
-                this.navigate();
-                // You can also use Util.openExternal to open an external webpage
-                // Util.openExternal("https://github.com/lensapp/lens")
-                // 
-                // See what else you can do with Util in our API doc
-                // <https://docs.k8slens.dev/master/extensions/api/modules/_core_api_utils_/>
-            }
+      {
+        // parentId is the id of the menu to put this menu item under
+        parentId: "help",
+        // label is the visible text label of the menu item
+        // !! Note that reload the Lens windows (CMD+R/Ctrl+R) doesn't reload the 'main' process
+        // !! to see the changes you made to "label", you need to restart Lens
+        label: "Sample",
+        click(): void {
+          console.log("clicked menu item");
+          // this.navigate() will navigate to this extension
+          // more parameters see our API doc
+          // <https://docs.k8slens.dev/master/extensions/api/classes/lensmainextension/?h=+navigate#navigate>
+          this.navigate();
+          // You can also use Util.openExternal to open an external webpage
+          // Util.openExternal("https://github.com/lensapp/lens")
+          // 
+          // See what else you can do with Util in our API doc
+          // <https://docs.k8slens.dev/master/extensions/api/modules/_core_api_utils_/>
         }
+      }
     ]
 }
