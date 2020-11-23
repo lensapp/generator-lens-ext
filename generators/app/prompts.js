@@ -1,4 +1,4 @@
-const validator = require("./validator");
+const { validateExtensionName, validatePublisher } = require("./validator");
 
 exports.askForExtensionName = async (generator, extensionConfig) => {
   const extensionName = generator.options["extensionName"];
@@ -10,7 +10,7 @@ exports.askForExtensionName = async (generator, extensionConfig) => {
     name: "name",
     message: "What's the name of your extension?",
     default: "my-first-lens-ext",
-    validate: validator.validateExtensionName
+    validate: validateExtensionName
   });
   extensionConfig.name = name;
 };
@@ -37,7 +37,8 @@ exports.askForExtensionPublisher = async (generator, extensionConfig) => {
     type: "input",
     name: "publisher",
     message: "What's your extension's publisher name?",
-    default: `@${extensionConfig.name}/${extensionConfig.name}`
+    default: `@${extensionConfig.name}/${extensionConfig.name}`,
+    validate: validatePublisher
   });
   extensionConfig.publisher = publisher;
 };
