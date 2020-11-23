@@ -34,12 +34,12 @@ export default class RendererExtension extends LensRendererExtension {
    *  ```
    *            Lens
    *   +-----------------------+
-   *   |*|                     |
-   *   |*|                     |
-   *   | |    globalPages      |
-   *   | |                     |
-   *   | |                     |
-   *   | |                     |
+   *   |                       |
+   *   |                       |
+   *   |      globalPages      |
+   *   |                       |
+   *   |                       |
+   *   |                       |
    *   +-----------------------+
    * 
    * ```
