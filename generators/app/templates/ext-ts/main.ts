@@ -34,53 +34,53 @@ import { Store, Util } from "@k8slens/extensions";
  * @extends {LensMainExtension}
  */
 export default class MainExtension extends LensMainExtension {
-    // Private instance fields used in onActivate/onDeactivate
-    #timer: NodeJS.Timeout
+  // Private instance fields used in onActivate/onDeactivate
+  #timer: ReturnType<typeof setInterval>
     
-    /**
+  /**
      * onActivate is called when your extension has been successfully enabled.
      * You can add your custom logic here, code inside onActivate block will be called 
      * when your extension is enabled. (typically from the Lens Extensions Page)
      * @memberof MainExtension
      */
-    onActivate(): void {
-      // print hello world when extension is activated
-      // !! Note that the console statements in MainExtension is NOT visible in the 
-      // !! DevTools console in Lens
-      // To see console statements, start the Lens app from a Terminal
-      console.log("activated");
+  onActivate(): void {
+    // print hello world when extension is activated
+    // !! Note that the console statements in MainExtension is NOT visible in the 
+    // !! DevTools console in Lens
+    // To see console statements, start the Lens app from a Terminal
+    console.log("activated");
 
-      // The following block is an example you can do in onActivate()
-      // You can access Lens' state data and periodically logs the name of the 
-      // currently active cluster in Lens.
-      // 
-      // see what else you can do with Store in our API docs
-      // <https://docs.k8slens.dev/master/extensions/api/modules/_core_api_stores_/>
-      const { clusterStore } = Store;
-      this.#timer = setInterval(() => {
-        if (!clusterStore.active) {
-          console.log("No active cluster");
-          return;
-        }
-        console.log("active cluster is", clusterStore.active.contextName);
-      }, 5000);
-    }
-    /**
+    // The following block is an example you can do in onActivate()
+    // You can access Lens' state data and periodically logs the name of the 
+    // currently active cluster in Lens.
+    // 
+    // see what else you can do with Store in our API docs
+    // <https://docs.k8slens.dev/master/extensions/api/modules/_core_api_stores_/>
+    const { clusterStore } = Store;
+    this.#timer = setInterval(() => {
+      if (!clusterStore.active) {
+        console.log("No active cluster");
+        return;
+      }
+      console.log("active cluster is", clusterStore.active.contextName);
+    }, 5000);
+  }
+  /**
      * onDeactivate is called when the extension is disabled (typically from the Lens 
      * Extensions Page) when implemented gives you a chance to clean up after your
      * extension, if necessary.
      * @memberof MainExtension
      */
-    onDeactivate(): void {
-      // print hello world when extension is deactivated
-      // !! Note that the console statements in MainExtension is NOT visible in the 
-      // !! DevTools console in Lens
-      // To see console statements, start the Lens app from a Terminal
-      console.log("deactivated");
+  onDeactivate(): void {
+    // print hello world when extension is deactivated
+    // !! Note that the console statements in MainExtension is NOT visible in the 
+    // !! DevTools console in Lens
+    // To see console statements, start the Lens app from a Terminal
+    console.log("deactivated");
 
-      // You can clear the setInterval called in onActivate() in onDeactivate
-      clearInterval(this.#timer);
-    }
+    // You can clear the setInterval called in onActivate() in onDeactivate
+    clearInterval(this.#timer);
+  }
     /**
      * appMenus is the only UI feature customizable in the main extension API.
      * Custom menu items can be inserted and linked to custom functionality, 
