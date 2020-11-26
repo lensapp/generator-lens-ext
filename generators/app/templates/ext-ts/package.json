@@ -22,7 +22,8 @@
 	"scripts": {
 		"start": "webpack --watch",
 		"build": "npm run clean && webpack",
-		"clean": "rm -rf ./dist"
+		"clean": "rm -rf ./dist",
+		"test": "jest"
 	},
 	"dependencies": {
 		<%- dep("react") %>,
