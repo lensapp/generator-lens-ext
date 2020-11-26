@@ -1,7 +1,11 @@
 import { LensRendererExtension, Interface, Component } from "@k8slens/extensions";
 import React from "react"
 
-const { Icon, PageLayout } = Component;
+import GlobalPage from "./components/GlobalPage";
+import GlobalPageMenuIcon from "./components/GlobalPageMenuIcon";
+import StatusBarItemIcon from "./components/StatusBarItemIcon";
+
+const { Icon } = Component;
 
 /**
  * 
@@ -49,18 +53,7 @@ export default class RendererExtension extends LensRendererExtension {
   globalPages: Interface.PageRegistration[] = [
     {
       components: {
-        Page: (): JSX.Element => (
-          <PageLayout
-            header={<h2>Extension Global Page</h2>}
-            showOnTop
-          >
-            <div>
-              <h1>Global Page Content</h1>
-              <br />
-              <p>A very long paragraph</p>
-            </div>
-          </PageLayout>
-        ),
+        Page: GlobalPage,
       }
     }
   ]
@@ -87,16 +80,7 @@ export default class RendererExtension extends LensRendererExtension {
     {
       title: "To Extension Global Page",
       components: {
-        Icon: (): JSX.Element => (
-          <Icon
-            material="trip_origin"
-            interactive
-            style={{
-              color: "white"
-            }}
-            onClick={() => this.navigate()}
-          />
-        ),
+        Icon: (): JSX.Element => <GlobalPageMenuIcon navigate={this.navigate} />,
       }
     }
   ]
@@ -121,16 +105,7 @@ export default class RendererExtension extends LensRendererExtension {
   */
   statusBarItems: Interface.StatusBarRegistration[] = [
     {
-      item: (
-        <Icon
-          material="link"
-          interactive
-          style={{
-            color: "white"
-          }}
-          onClick={() => this.navigate()}
-        />
-      )
+      item: (): JSX.Element => <StatusBarItemIcon navigate={this.navigate} />,
     }
   ]
 
