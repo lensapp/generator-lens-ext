@@ -24,16 +24,38 @@
 		"build": "npm run clean && webpack",
 		"clean": "rm -rf ./dist"
 	},
+	"dependencies": {
+		<%- dep("react") %>,
+		<%- dep("react-dom") %>
+	},
 	"devDependencies": {
 		<%- dep("@k8slens/extensions") %>,
 		<%- dep("ts-loader") %>,
 		<%- dep("typescript") %>,
 		<%- dep("@types/node") %>,
 		<%- dep("@types/react") %>,
+		<%- dep("@types/jest") %>,
 		<%- dep("webpack") %>,
 		<%- dep("webpack-cli") %>,
 		<%- dep("eslint") %>,
 		<%- dep("@typescript-eslint/eslint-plugin") %>,
-		<%- dep("@typescript-eslint/parser") %>
+		<%- dep("@typescript-eslint/parser") %>,
+		<%- dep("jest") %>,
+		<%- dep("@babel/preset-env") %>,
+		<%- dep("@babel/preset-react") %>,
+		<%- dep("@babel/preset-typescript") %>,
+		<%- dep("electron") %>,
+		<%- dep("@jest-runner/electron") %>,
+		<%- dep("@testing-library/jest-dom") %>,
+		<%- dep("@testing-library/react") %>
+	},
+	"jest": {
+		"runner": "@jest-runner/electron",
+		"testEnvironment": "@jest-runner/electron/environment"
+	},
+	"lingui": {
+		"locales": [
+			"en"
+		]
 	}
 }
