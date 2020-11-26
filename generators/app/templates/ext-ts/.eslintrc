@@ -20,7 +20,8 @@
     "env": {
         // this tells eslint it's safe to use `require`/`module.exports`/`__dirname`...
         // that are only legal in node.js, we use these in `webpack.config.js`
-        "node": true
+        "node": true,
+        "jest": true
     },
     "rules": {
         "indent": ["error", 2],
