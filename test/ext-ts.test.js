@@ -1,5 +1,3 @@
-/* eslint-env jest */
-
 const path = require("path");
 const fs = require("fs");
 

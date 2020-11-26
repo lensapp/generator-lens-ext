@@ -1,7 +1,8 @@
 module.exports = {
   "env": {
     "node": true,
-    "es2020": true
+    "es2020": true,
+    "jest": true,
   },
   "parserOptions": {
     "sourceType": "module"
