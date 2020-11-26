@@ -33,8 +33,6 @@
     "yosay": "^2.0.2"
   },
   "devDependencies": {
-    "@k8slens/extensions": "^4.0.0-beta.4",
-    "@types/react": "^16.9.56",
     "@types/node": "^12.12.9",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
@@ -48,6 +46,9 @@
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/generators/app/templates"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/generators/app/templates/"
     ]
   }
 }
