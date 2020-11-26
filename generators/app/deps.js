@@ -1,10 +1,15 @@
+const { devDependencies, dependencies } = require("../../package.json");
+
 module.exports = {
-  "@k8slens/extensions": "^4.0.0-alpha.5",
+  "react-dom": "^17.0.1",
   "ts-loader": "^8.0.11",
-  "typescript": "^4.0.5",
-  "@types/react": "^16.9.56",
-  "@types/node": "^12.12.9",
   "webpack": "^4.44.2",
   "webpack-cli": "^3.3.11",
-  "eslint": "^7.13.0"
+  "@babel/preset-env": "^7.12.7",
+  "@babel/preset-react": "^7.12.7",
+  "@babel/preset-typescript": "^7.12.7",
+  "electron": "^11.0.3",
+  "@jest-runner/electron": "^3.0.0",
+  ...devDependencies,
+  ...dependencies,
 };

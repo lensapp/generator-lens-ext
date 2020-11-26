@@ -25,13 +25,11 @@ module.exports = {
     fs.copyTpl(generator.sourceRoot() + "/tsconfig.json", name + "/tsconfig.json", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/main.ts", name + "/main.ts", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/renderer.tsx", name + "/renderer.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/page.tsx", name + "/page.tsx", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/package.json", name + "/package.json", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/webpack.config.js", name + "/webpack.config.js", extensionConfig);
 
-    fs.copy(generator.sourceRoot() + "/.eslintrc.js", name + "/.eslintrc.js");
-    fs.copy(generator.sourceRoot() + "/.eslintrc.main.js", name + "/.eslintrc.main.js");
-    fs.copy(generator.sourceRoot() + "/.eslintrc.renderer.js", name + "/.eslintrc.renderer.js");
+    fs.copy(generator.sourceRoot() + "/.eslintrc", name + "/.eslintrc");
+    fs.copy(generator.sourceRoot() + "/.eslintignore", name + "/.eslintignore");
 
   }
 };

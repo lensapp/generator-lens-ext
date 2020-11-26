@@ -1,5 +1,3 @@
-/* eslint-env jest */
-
 const path = require("path");
 const fs = require("fs");
 
@@ -22,8 +20,8 @@ test("ext-ts generator works as expected", async () => {
   // console.log("resultPath", resultPath);
   const files = [
     "README.md", "package.json", "webpack.config.js", "tsconfig.json", ".gitignore",
-    "main.ts", "renderer.tsx", "page.tsx",
-    ".eslintrc.js", ".eslintrc.main.js", ".eslintrc.renderer.js"
+    "main.ts", "renderer.tsx",
+    ".eslintrc", ".eslintignore"
   ].map((fileName) => `${resultPath}/${name}/${fileName}`);
   assert.file(files);
   const packageJSON = JSON.parse(fs.readFileSync(`${resultPath}/${name}/package.json`, "utf8"));
