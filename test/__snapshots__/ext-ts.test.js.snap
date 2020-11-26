@@ -59,6 +59,7 @@ Object {
     "build": "npm run clean && webpack",
     "clean": "rm -rf ./dist",
     "start": "webpack --watch",
+    "test": "jest",
   },
   "version": "0.0.1",
 }
