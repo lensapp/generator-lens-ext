@@ -21,7 +21,9 @@ test("ext-ts generator works as expected", async () => {
   const files = [
     "README.md", "package.json", "webpack.config.js", "tsconfig.json", ".gitignore",
     "main.ts", "renderer.tsx",
-    ".eslintrc", ".eslintignore"
+    "components/GlobalPage.tsx", "components/GlobalPageMenuIcon.tsx", "components/StatusBarItemIcon.tsx",
+    "components/GlobalPage.test.tsx", "components/GlobalPageMenuIcon.test.tsx", "components/StatusBarItemIcon.test.tsx",
+    "babel.config.js", ".eslintrc", ".eslintignore"
   ].map((fileName) => `${resultPath}/${name}/${fileName}`);
   assert.file(files);
   const packageJSON = JSON.parse(fs.readFileSync(`${resultPath}/${name}/package.json`, "utf8"));
