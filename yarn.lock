@@ -497,10 +497,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@k8slens/extensions@^4.0.0-beta.4":
-  version "4.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@k8slens/extensions/-/extensions-4.0.0-beta.4.tgz#0f758a12e84e93b566bc502f865830d0df431e31"
-  integrity sha512-jpdgNap9zC2eoyh0y33UqWKWn9Ecbm29PmpqPVGUOhLNtOm7bYD3Cbg+i9jOyXqpbQYCG0Jy0Hfor18rgjhmhg==
+"@k8slens/extensions@^4.0.0-rc.1":
+  version "4.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@k8slens/extensions/-/extensions-4.0.0-rc.1.tgz#e7d13cbf5242732c17a9b1a86077151a21c84e83"
+  integrity sha512-cHa1u51/8KSNelRvLzQBqQUT/kvImmQhWECkUHtzambsJsaJ2PJNnU7Xza6RTyE2UQHLEBfT0iwGTtY1xzy3MQ==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
