@@ -9,7 +9,7 @@ const GlobalPage = (): JSX.Element =>
       <h2 key={"header"} data-testid="global-page-header">Extension Global Page</h2>
     }
     showOnTop
-    data-testid="global-page-title"
+    data-testid="global-page-pagelayout"
   >
     <div key={"wrapper"}>
       <h1 data-testid="global-page-title">Global Page Content</h1>
