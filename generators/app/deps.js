@@ -1,7 +1,6 @@
 const { devDependencies, dependencies } = require("../../package.json");
 
 module.exports = {
-  "react-dom": "^17.0.1",
   "ts-loader": "^8.0.11",
   "webpack": "^4.44.2",
   "webpack-cli": "^3.3.11",
