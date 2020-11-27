@@ -112,7 +112,7 @@ module.exports = class extends Generator {
 
     this.log("\r\n");
     this.log(`Your extension "${this.extensionConfig.name}" has been created!`);
-    this.log(`cd to ${this.extensionConfig.name}, and 'npm start' to start the development.`);
+    this.log(`cd to ${this.extensionConfig.name}, and '${this.extensionConfig.pkgManager} start' to start the development.`);
     this.log("\r\n");
     
     this.log("Lens Extension Documentation https://docs.k8slens.dev/latest/extensions/.");
