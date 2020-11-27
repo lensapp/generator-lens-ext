@@ -17,4 +17,13 @@ describe("<StatusBarItemIcon />", () => {
     expect(navigate).toHaveBeenCalled();
     expect(screen.getByTestId("statusbar-item-icon")).toHaveStyle({ color: "rgb(255, 255, 0)" });
   });
+
+  it("matches snapshot", () => {
+    // this test is totally optional, but might be useful for extension developers
+    // to track the version diffs in "Component" from @k8slens/extensions (if you upgrade) 
+    // and react to the upstream changes.
+    const { asFragment } = render(<StatusBarItemIcon />);
+    expect(asFragment()).toMatchInlineSnapshot();
+  });
+
 })

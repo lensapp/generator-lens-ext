@@ -5,6 +5,7 @@ import "@testing-library/jest-dom/extend-expect"
 import GlobalPageMenuIcon from "./GlobalPageMenuIcon";
 
 describe("<GlobalPageMenuIcon />", () => {
+
   it("renders w/o issues", () => {
     const { container } = render(<GlobalPageMenuIcon />);
     expect(container).toBeInTheDocument();
@@ -16,4 +17,13 @@ describe("<GlobalPageMenuIcon />", () => {
     fireEvent.click(screen.getByTestId("global-page-menu-icon"));
     expect(navigate).toHaveBeenCalled();
   });
+
+  it("matches snapshot", () => {
+    // this test is totally optional, but might be useful for extension developers
+    // to track the version diffs in "Component" from @k8slens/extensions (if you upgrade) 
+    // and react to the upstream changes.
+    const { asFragment } = render(<GlobalPageMenuIcon />);
+    expect(asFragment()).toMatchInlineSnapshot();
+  });
+  
 })
