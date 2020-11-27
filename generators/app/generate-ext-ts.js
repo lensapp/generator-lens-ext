@@ -25,12 +25,7 @@ module.exports = {
     fs.copyTpl(generator.sourceRoot() + "/tsconfig.json", name + "/tsconfig.json", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/main.ts", name + "/main.ts", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/renderer.tsx", name + "/renderer.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/components/GlobalPage.tsx", name + "/components/GlobalPage.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/components/GlobalPage.test.tsx", name + "/components/GlobalPage.test.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/components/GlobalPageMenuIcon.tsx", name + "/components/GlobalPageMenuIcon.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/components/GlobalPageMenuIcon.test.tsx", name + "/components/GlobalPageMenuIcon.test.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/components/StatusBarItemIcon.tsx", name + "/components/StatusBarItemIcon.tsx", extensionConfig);
-    fs.copyTpl(generator.sourceRoot() + "/components/StatusBarItemIcon.test.tsx", name + "/components/StatusBarItemIcon.test.tsx", extensionConfig);
+    fs.copyTpl(generator.sourceRoot() + "/components", name + "/components", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/package.json", name + "/package.json", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/webpack.config.js", name + "/webpack.config.js", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/babel.config.js", name + "/babel.config.js", extensionConfig);
