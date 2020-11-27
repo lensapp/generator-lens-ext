@@ -76,7 +76,7 @@ exports.askForPackageManager = async (generator, extensionConfig) => {
         value: "yarn"
       }
     ],
-    default: "npm"
+    default: "yarn"
   });
   extensionConfig.pkgManager = pkgManager;
 };
