@@ -19,7 +19,7 @@ module.exports = {
     const { gitInit, name } = extensionConfig;
     const { fs } = generator;
     if (gitInit) {
-      fs.copy(generator.sourceRoot() + "/.gitignore", name + "/.gitignore");
+      fs.copy(generator.sourceRoot() + "/gitignore", name + "/.gitignore");
     }
     fs.copyTpl(generator.sourceRoot() + "/README.md", name + "/README.md", extensionConfig);
     fs.copyTpl(generator.sourceRoot() + "/tsconfig.json", name + "/tsconfig.json", extensionConfig);

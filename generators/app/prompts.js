@@ -1,4 +1,7 @@
+const os = require("os");
 const { validateExtensionName, validatePublisher } = require("./validator");
+
+const platform = os.platform();
 
 exports.askForExtensionName = async (generator, extensionConfig) => {
   const extensionName = generator.options["extensionName"];
@@ -84,8 +87,10 @@ exports.askForPackageManager = async (generator, extensionConfig) => {
 exports.askForSymlink = (generator, extensionConfig) => generator.prompt({
   type: "confirm",
   name: "symlink",
-  // eslint-disable-next-line
-  message: "symlink created extension folder to ~/.k8slens/extensions (mac/linux) or :\Users\<user>\.k8slens\extensions (win)",
+  message: `symlink extension folder to ${
+    // eslint-disable-next-line
+    platform.includes("win32") ? "C:/\Users/\<user>/\.k8slens/\extensions" : "~/.k8slens/extensions"}
+  `,
   default: true
 }).then(({ symlink }) => {
   extensionConfig.symlink = symlink;
