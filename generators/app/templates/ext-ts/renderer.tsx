@@ -80,7 +80,7 @@ export default class RendererExtension extends LensRendererExtension {
     {
       title: "To Extension Global Page",
       components: {
-        Icon: (): JSX.Element => <GlobalPageMenuIcon navigate={this.navigate} />,
+        Icon: (): JSX.Element => <GlobalPageMenuIcon navigate={this.navigate.bind(this)} />,
       }
     }
   ]
@@ -105,7 +105,7 @@ export default class RendererExtension extends LensRendererExtension {
   */
   statusBarItems: Interface.StatusBarRegistration[] = [
     {
-      item: (): JSX.Element => <StatusBarItemIcon navigate={this.navigate} />,
+      item: (): JSX.Element => <StatusBarItemIcon navigate={this.navigate.bind(this)} />,
     }
   ]
 
