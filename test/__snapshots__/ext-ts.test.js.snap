@@ -56,10 +56,11 @@ Object {
   "publisher": "random publisher",
   "renderer": "dist/renderer.js",
   "scripts": Object {
-    "build": "npm run clean && webpack",
+    "build": "npm run clean && NODE_ENV=production webpack",
     "clean": "rm -rf ./dist",
-    "start": "webpack --watch",
-    "test": "jest",
+    "lint": "eslint",
+    "start": "NODE_ENV=development webpack --watch",
+    "test": "npm run lint && jest",
   },
   "version": "0.0.1",
 }
