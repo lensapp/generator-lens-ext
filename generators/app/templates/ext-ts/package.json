@@ -23,7 +23,8 @@
 		"start": "webpack --watch",
 		"build": "npm run clean && webpack",
 		"clean": "rm -rf ./dist",
-		"test": "jest"
+		"lint": "eslint",
+		"test": "npm run lint && jest"
 	},
 	"dependencies": {
 		<%- dep("react") %>,
