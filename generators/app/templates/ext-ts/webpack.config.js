@@ -8,6 +8,8 @@ module.exports = [
     context: __dirname,
     target: "electron-main",
     mode: process.env.NODE_ENV ?? "production",
+    // Only enable source map in development mode
+    devtool: process.env.NODE_ENV === "development" && "eval-source-map",
     module: {
       rules: [
         {
