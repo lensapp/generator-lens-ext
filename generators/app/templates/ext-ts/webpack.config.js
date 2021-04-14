@@ -7,7 +7,7 @@ module.exports = [
     entry: "./main.ts",
     context: __dirname,
     target: "electron-main",
-    mode: "production",
+    mode: process.env.NODE_ENV ?? "production",
     module: {
       rules: [
         {
@@ -37,7 +37,9 @@ module.exports = [
     entry: "./renderer.tsx",
     context: __dirname,
     target: "electron-renderer",
-    mode: "production",
+    mode: process.env.NODE_ENV ?? "production",
+    // Only enable source map in development mode
+    devtool: process.env.NODE_ENV === "development" && "eval-source-map",
     module: {
       rules: [
         {
