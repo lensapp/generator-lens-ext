@@ -58,11 +58,10 @@ export default class MainExtension extends LensMainExtension {
     // <https://docs.k8slens.dev/master/extensions/api/modules/_core_api_stores_/>
     const { clusterStore } = Store;
     this.#timer = setInterval(() => {
-      if (!clusterStore.active) {
-        console.log("No active cluster");
+      if (clusterStore.clustersList.length === 0) {
+        console.log("No cluster");
         return;
       }
-      console.log("active cluster is", clusterStore.active.contextName);
     }, 5000);
   }
   /**
