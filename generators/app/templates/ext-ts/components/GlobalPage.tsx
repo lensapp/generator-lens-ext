@@ -3,7 +3,7 @@ import { Renderer } from "@k8slens/extensions";
 
 const { SettingLayout } = Renderer.Component;
 
-const GlobalPage = (): JSX.Element =>
+const GlobalPage = () =>
   <SettingLayout
     data-testid="global-page-pagelayout"
   >
