@@ -1,15 +1,14 @@
-import { LensRendererExtension, Interface, Component } from "@k8slens/extensions";
+import { Renderer } from "@k8slens/extensions";
 import React from "react"
 
 import GlobalPage from "./components/GlobalPage";
-import GlobalPageMenuIcon from "./components/GlobalPageMenuIcon";
 import StatusBarItemIcon from "./components/StatusBarItemIcon";
 
-const { Icon } = Component;
+const { Icon } = Renderer.Component;
 
 /**
  * 
- * RendererExtension which extends LensRendererExtension runs in Lens' 'renderer' process (NOT 'main' process)
+ * RendererExtension which extends Renderer.LensExtension runs in Lens' 'renderer' process (NOT 'main' process)
  * main vs renderer <https://www.electronjs.org/docs/tutorial/quick-start#main-and-renderer-processes>
  * 
  * LensRendererExtension is the interface to Lens' renderer process. Its api allows you to access, configure, 
@@ -19,16 +18,16 @@ const { Icon } = Component;
  * cluster features, app preferences, status bar items... See details:
  * <https://docs.k8slens.dev/master/extensions/capabilities/common-capabilities/#renderer-extension>
  *
- * LensRendererExtension API doc <https://docs.k8slens.dev/master/extensions/api/classes/lensrendererextension/>
+ * Renderer.LensExtension API doc <https://docs.k8slens.dev/master/extensions/api/classes/lensrendererextension/>
  *
  * To see console statements in 'renderer' process, go to the console tab in DevTools in Lens
  * View > Toggle Developer Tools > Console.
  * 
  * @export
  * @class RendererExtension
- * @extends {LensRendererExtension}
+ * @extends {Renderer.LensExtension}
  */
-export default class RendererExtension extends LensRendererExtension {
+export default class RendererExtension extends Renderer.LensExtension {
 
   /**
    *  `globalPages` allows you register custom global page.
@@ -50,37 +49,10 @@ export default class RendererExtension extends LensRendererExtension {
    *
    * @memberof RendererExtension
    */
-  globalPages: Interface.PageRegistration[] = [
+  globalPages = [
     {
       components: {
         Page: GlobalPage,
-      }
-    }
-  ]
-
-  /**
-   *  `globalPageMenus` allows you register custom global page.
-   *
-   *  ```
-   *            Lens
-   *   +-----------------------+
-   *   |*|                     |
-   *   |*| <---------------+ globalPageMenus
-   *   | |                     |
-   *   | |                     |
-   *   | |                     |
-   *   | |                     |
-   *   +-----------------------+
-   * 
-   * ```
-   *
-   * @memberof RendererExtension
-   */
-  globalPageMenus: Interface.PageMenuRegistration[] = [
-    {
-      title: "To Extension Global Page",
-      components: {
-        Icon: (): JSX.Element => <GlobalPageMenuIcon navigate={this.navigate.bind(this)} />,
       }
     }
   ]
@@ -103,9 +75,9 @@ export default class RendererExtension extends LensRendererExtension {
    *
    * @memberof RendererExtension
   */
-  statusBarItems: Interface.StatusBarRegistration[] = [
+  statusBarItems = [
     {
-      item: (): JSX.Element => <StatusBarItemIcon navigate={this.navigate.bind(this)} />,
+      item: () => <StatusBarItemIcon />,
     }
   ]
 

@@ -1,14 +1,10 @@
 import React from "react"
-import { Component } from "@k8slens/extensions";
+import { Renderer } from "@k8slens/extensions";
 
-const { PageLayout } = Component;
+const { SettingLayout } = Renderer.Component;
 
 const GlobalPage = (): JSX.Element =>
-  <PageLayout
-    header={
-      <h2 key={"header"} data-testid="global-page-header">Extension Global Page</h2>
-    }
-    showOnTop
+  <SettingLayout
     data-testid="global-page-pagelayout"
   >
     <div key={"wrapper"}>
@@ -16,6 +12,6 @@ const GlobalPage = (): JSX.Element =>
       <br />
       <p data-testid="global-page-paragraph">A very long paragraph</p>
     </div>
-  </PageLayout>
+  </SettingLayout>
 
 export default GlobalPage
