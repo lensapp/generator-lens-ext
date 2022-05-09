@@ -6,13 +6,8 @@
 	"main": "dist/main.js",
 	"renderer": "dist/renderer.js",
 	"engines": {
-		"node": ">=12.0 <13.0"
-	},
-	"contributes": {
-		"crds": [],
-		"cloudProviders": [],
-		"kubernetesDistros": []
-	},
+    "node": ">=14 <15"
+  },
 	"keywords": [
 		"lens",
 		"extension",
@@ -46,18 +41,7 @@
 		<%- dep("@babel/preset-env") %>,
 		<%- dep("@babel/preset-react") %>,
 		<%- dep("@babel/preset-typescript") %>,
-		<%- dep("electron") %>,
-		<%- dep("@jest-runner/electron") %>,
 		<%- dep("@testing-library/jest-dom") %>,
 		<%- dep("@testing-library/react") %>
-	},
-	"jest": {
-		"runner": "@jest-runner/electron",
-		"testEnvironment": "@jest-runner/electron/environment"
-	},
-	"lingui": {
-		"locales": [
-			"en"
-		]
 	}
 }
