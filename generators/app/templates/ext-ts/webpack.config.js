@@ -8,8 +8,8 @@ module.exports = [
     context: __dirname,
     target: "electron-main",
     mode: process.env.NODE_ENV ?? "production",
-    // Only enable source map in development mode
-    devtool: process.env.NODE_ENV === "development" && "eval-source-map",
+    devtool: process.env.NODE_ENV === "development" ? "cheap-module-source-map" : "source-map",
+    cache: process.env.NODE_ENV === "development" ? { type: "filesystem" } : false,
     module: {
       rules: [
         {
@@ -22,8 +22,7 @@ module.exports = [
     externals: [
       {
         "@k8slens/extensions": "var global.LensExtensions",
-        "mobx": "var global.Mobx",
-        "react": "var global.React"
+        "mobx": "var global.Mobx"
       }
     ],
     resolve: {
@@ -34,14 +33,18 @@ module.exports = [
       filename: "main.js",
       path: path.resolve(__dirname, "dist"),
     },
+    node: {
+      __dirname: false,
+      __filename: false
+    }
   },
   {
     entry: "./renderer.tsx",
     context: __dirname,
     target: "electron-renderer",
     mode: process.env.NODE_ENV ?? "production",
-    // Only enable source map in development mode
-    devtool: process.env.NODE_ENV === "development" && "eval-source-map",
+    devtool: process.env.NODE_ENV === "development" ? "cheap-module-source-map" : "source-map",
+    cache: process.env.NODE_ENV === "development" ? { type: "filesystem" } : false,
     module: {
       rules: [
         {
@@ -55,6 +58,8 @@ module.exports = [
       {
         "@k8slens/extensions": "var global.LensExtensions",
         "react": "var global.React",
+        "react-dom": "var global.ReactDOM",
+        "mobx-react": "var global.MobxReact",
         "mobx": "var global.Mobx"
       }
     ],
