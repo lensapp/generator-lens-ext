@@ -7,7 +7,7 @@
 	"renderer": "dist/renderer.js",
 	"engines": {
     "node": ">=14 <15",
-		"lens": "^5.0.0"
+    "lens": "^5.0.0"
   },
 	"keywords": [
 		"lens",
