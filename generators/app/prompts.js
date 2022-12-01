@@ -84,14 +84,17 @@ exports.askForPackageManager = async (generator, extensionConfig) => {
   extensionConfig.pkgManager = pkgManager;
 };
 
-exports.askForSymlink = (generator, extensionConfig) => generator.prompt({
-  type: "confirm",
-  name: "symlink",
-  message: `symlink extension folder to ${
-    // eslint-disable-next-line
-    platform.includes("win32") ? "C:/\Users/\<user>/\.k8slens/\extensions" : "~/.k8slens/extensions"}
-  `,
-  default: true
-}).then(({ symlink }) => {
+exports.askForSymlink = async (generator, extensionConfig) => {
+  const folder = platform.includes("win32")
+    ? "C:\\Users\\<user>\\.k8slens\\extensions"
+    : "~/.k8slens/extensions";
+
+  const { symlink } = await generator.prompt({
+    type: "confirm",
+    name: "symlink",
+    message: `symlink extension folder to ${folder}`,
+    default: true
+  });
+
   extensionConfig.symlink = symlink;
-});
+};
