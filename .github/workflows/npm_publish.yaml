@@ -11,27 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+      # same node.js version as in package.json > engines
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "16"
 
-    # same node.js version as in package.json > engines
-    - uses: actions/setup-node@v2-beta
-      with:
-        node-version: '12'
-    
-    # npm version patch will automatically git commit
-    - name: Run 'npm version patch'
-      run: |
-        git config --local user.email "github-action@mirantis.com"
-        git config --local user.name "Github Action Bot"
-        npm version patch
+      # npm version patch will automatically git commit
+      - name: Run 'npm version patch'
+        run: |
+          git config --local user.email "github-action@mirantis.com"
+          git config --local user.name "Github Action Bot"
+          npm version patch
 
-    - name: Push commits
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
-        tags: true
+      - name: Push commits
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          tags: true
 
   npm_publish:
     name: NPM publish
@@ -39,48 +38,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+      # need this if commit/push in other jobs
+      - name: Fetch latest commits by other jobs
+        run: |
+          git pull
 
-    # need this if commit/push in other jobs
-    - name: Fetch latest commits by other jobs
-      run: |
-        git pull
+      # same node.js version as in package.json > engines
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "16"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@k8slens"
 
-    # same node.js version as in package.json > engines
-    - uses: actions/setup-node@v2-beta
-      with:
-        node-version: '12'
-        registry-url: 'https://registry.npmjs.org'
-        scope: '@k8slens'
+      - name: Publish
+        run: |
+          NEW_VERSION=$(node -p -e "require('./package.json').version")
+          yarn
+          yarn publish --new-version $NEW_VERSION --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - name: Publish
-      run: |
-        NEW_VERSION=$(node -p -e "require('./package.json').version")
-        yarn
-        yarn publish --new-version $NEW_VERSION --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-    # see https://api.slack.com/apps/A01F1B1M9C1/incoming-webhooks
-    - name: Notify '#lens-dev' channel
-      run: |
-        NEW_VERSION=$(node -p -e "require('./package.json').version")
-        curl -X POST $SLACK_WEBHOOK_LENS_CI_CHANNEL \
-        -H 'Content-type: application/json' \
-        --data-binary @- << EOF
-        {
-            "text": "published generator-lens-ext v$NEW_VERSION to NPM",
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "generator-lens-ext v$NEW_VERSION published, install\n\`\`\`\nnpm install -g generator-lens-ext\n\`\`\`\nVisit <https://github.com/lensapp/generator-lens-ext> for details."
+      # see https://api.slack.com/apps/A01F1B1M9C1/incoming-webhooks
+      - name: Notify '#lens-dev' channel
+        run: |
+          NEW_VERSION=$(node -p -e "require('./package.json').version")
+          curl -X POST $SLACK_WEBHOOK_LENS_CI_CHANNEL \
+          -H 'Content-type: application/json' \
+          --data-binary @- << EOF
+          {
+              "text": "published generator-lens-ext v$NEW_VERSION to NPM",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "generator-lens-ext v$NEW_VERSION published, install\n\`\`\`\nnpm install -g generator-lens-ext\n\`\`\`\nVisit <https://github.com/lensapp/generator-lens-ext> for details."
+                  }
                 }
-              }
-            ]
-        }
-        EOF
-      env:
-        SLACK_WEBHOOK_LENS_CI_CHANNEL: ${{ secrets.SLACK_WEBHOOK_LENS_CI_CHANNEL }}
+              ]
+          }
+          EOF
+        env:
+          SLACK_WEBHOOK_LENS_CI_CHANNEL: ${{ secrets.SLACK_WEBHOOK_LENS_CI_CHANNEL }}
