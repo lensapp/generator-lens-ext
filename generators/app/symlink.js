@@ -1,5 +1,5 @@
 const os = require("os");
-const { exec } = require("child_process");
+const { execSync } = require("child_process");
 
 exports.symlink = (src, extName) => {
   const platform = os.platform();
@@ -11,8 +11,8 @@ exports.symlink = (src, extName) => {
   } else {
     // mac or linux
     const extensionsRoot = "~/.k8slens/extensions";
-    exec(`mkdir -p ${extensionsRoot}`);
-    exec(`ln -s ${src} ${extensionsRoot}/${extName}`);
+    execSync(`mkdir -p ${extensionsRoot}`);
+    execSync(`ln -s ${src} ${extensionsRoot}/${extName}`);
     console.info(`symlinked ${src} -> ${extensionsRoot}/${extName}; platform:${platform}`);
   }
 };
