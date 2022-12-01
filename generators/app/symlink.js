@@ -11,8 +11,8 @@ exports.symlink = (src, extName) => {
   } else {
     // mac or linux
     const extensionsRoot = "~/.k8slens/extensions";
-    execSync(`mkdir -p ${extensionsRoot}`);
-    execSync(`ln -s ${src} ${extensionsRoot}/${extName}`);
-    console.info(`symlinked ${src} -> ${extensionsRoot}/${extName}; platform:${platform}`);
+    execSync(`mkdir -p "${extensionsRoot}"`);
+    execSync(`ln -s "${src}" "${extensionsRoot}/${extName}"`);
+    console.info(`symlinked "${src}" -> "${extensionsRoot}/${extName}"; platform:${platform}`);
   }
 };
