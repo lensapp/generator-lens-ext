@@ -6,9 +6,9 @@
 	"main": "dist/main.js",
 	"renderer": "dist/renderer.js",
 	"engines": {
-    "node": ">=14 <15",
-    "lens": "^5.0.0"
-  },
+		"node": ">=16 <17",
+		"lens": "^6.0.0"
+	},
 	"keywords": [
 		"lens",
 		"extension",
