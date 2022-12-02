@@ -4,7 +4,6 @@ const path = require("path");
 const { version: generatorVersion } = require("../../package.json");
 
 const dependencyVersions = require("./deps");
-const { symlink } = require("./symlink");
 
 // TODO: add JS version
 // const commandjs = require("./generate-ext-js");
@@ -112,16 +111,14 @@ module.exports = class extends Generator {
       });
     }
 
-    // Symlink
-    if (this.extensionConfig.symlink) {
-      symlink(this.destinationPath(`./${this.extensionConfig.name}`), this.extensionConfig.name);
-    }
+    this.log("\r\n");
+    this.log("While developing your extension you should either work directly in '~/.k8slens/extensions' or symlink your working directory into that folder");
 
     this.log("\r\n");
     this.log(`Your extension "${this.extensionConfig.name}" has been created!`);
     this.log(`cd to ${this.extensionConfig.name}, and '${this.extensionConfig.pkgManager} start' to start the development.`);
     this.log("\r\n");
-    
+
     this.log("Lens Extension Documentation https://docs.k8slens.dev/latest/extensions/.");
     this.log("Join #lens-extensions on Lens Dev Slack http://k8slens.slack.com/");
     this.log("\r\n");
