@@ -1,7 +1,4 @@
-const os = require("os");
 const { validateExtensionName, validatePublisher } = require("./validator");
-
-const platform = os.platform();
 
 exports.askForExtensionName = async (generator, extensionConfig) => {
   const extensionName = generator.options["extensionName"];
@@ -82,19 +79,4 @@ exports.askForPackageManager = async (generator, extensionConfig) => {
     default: "yarn"
   });
   extensionConfig.pkgManager = pkgManager;
-};
-
-exports.askForSymlink = async (generator, extensionConfig) => {
-  const folder = platform.includes("win32")
-    ? "C:\\Users\\<user>\\.k8slens\\extensions"
-    : "~/.k8slens/extensions";
-
-  const { symlink } = await generator.prompt({
-    type: "confirm",
-    name: "symlink",
-    message: `symlink extension folder to ${folder}`,
-    default: true
-  });
-
-  extensionConfig.symlink = symlink;
 };

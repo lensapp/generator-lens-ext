@@ -1,6 +1,6 @@
 {
   "name": "generator-lens-ext",
-  "version": "0.0.22",
+  "version": "0.1.0",
   "description": "Yeoman generator for Lens extension",
   "copyright": "© 2020, Mirantis, Inc.",
   "license": "MIT",
