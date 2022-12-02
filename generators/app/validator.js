@@ -1,4 +1,4 @@
-const nameRegex = /^[a-z0-9][a-z0-9\-]*$/i;
+const nameRegex = /^[a-z0-9][a-z0-9-]*$/i;
 const publisherRegex = /^(@[a-z0-9-~][a-z0-9-._~]*\/)[a-z0-9-~][a-z0-9-._~]*$/;
 
 module.exports.validateExtensionName = (id) => {
